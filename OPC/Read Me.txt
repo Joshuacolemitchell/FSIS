@@ -1,0 +1,35 @@
+OPC UA Shared Variable Server
+
+Introduction
+
+The OPC UA (Unified Architecture) standard has been introduced by the OPC foundation and offers some distinct advantages over the DA standard that we are most familiar with. A key advantage is that it is no longer built on COM technology which means we can run the server on platforms other than Windows, including Real-Time.
+
+This example uses the OPC UA library, introduced to LabVIEW DSC module 2011 SP1, to automatically mirror selected shared variable libraries on a OPC UA server. This can be used as a drop in VI to add this functionality to a LabVIEW system.
+
+Please note this is only example code and is released under the NI sample code license.
+
+Application Description
+
+Start Up
+
+A key part of this application is start up as this is where the connections get set up. The shared variables are scanned from the specified libraries (with the exclusion of the blacklist which is useful when working with scan engine IO). For each of these we create a synchronised tag object.
+
+Following this we then build the structure of the OPC UA structure to mimic the SV structure. The array of objects is then put in to a data value reference (DVR). This allows us to access them in parallel loops.
+
+Polling
+
+The architecture then runs two loops to update between the two systems. The OPC UA updates are detected from a user event which the library fires when it detects an update (this again is actually done at a set interval). On detecting a change we identify which indexes in our object array this corresponds to and then update them apprpriately. The data value is given as a variant which greatly simplifies this piece of code.
+
+For the Shared Variables (SVs) we have to poll the items periodically instead. The object contains the previously known value so we can check if this has changed or not (the DVR and shared objects means we can also track updates from the OPC UA server as well) and the OPC UA tag is updated if needed.
+
+For this loop performance was very important so I removed some diagnostic code that tracked errors to a tag as dealing with strings was too slow. This is also why there is a single DVR containing an array of objects as opposed to an array of DVRs, meaning we have 1x the overhead of dereferencing, instead of nx (the tradeoff is that the other loop is locked out of the DVR for longer).
+
+Performance
+
+The exact performance is going to depend on your poll rate and number of tags. At a polling rate of 500ms with 140 tags we saw an increase of CPU of around 12% on a 9025 cRIO controller. A similar test with 44 tags showed an increase of 2.66%.
+
+Please feel free to try this and post any feedback you have on this page.
+
+License
+
+The attached Code is provided As Is.  It has not been tested or validated as a product, for use in a deployed application or system, or for use in hazardous environments.  You assume all risks for use of the Code and use of the Code is subject to the Sample Code License Terms which can be found at: http://ni.com/samplecodelicense or in the license folder.

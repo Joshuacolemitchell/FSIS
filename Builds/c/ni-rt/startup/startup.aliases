@@ -1,0 +1,17 @@
+[MNBI-SSThermoRec-Drop0]
+MNBI-SSThermoRec-Drop0="10.240.24.162"
+
+[MNBI-SSThermoRec-Drop1]
+MNBI-SSThermoRec-Drop1="10.240.24.163"
+
+[MNBI-SWThermoRec-Drop0]
+MNBI-SWThermoRec-Drop0="localhost"
+
+[MNBI-SWThermoRec-Drop1]
+MNBI-SWThermoRec-Drop1="10.240.24.169"
+
+[My Computer]
+My Computer="10.240.24.66"
+
+[SW_PINIController]
+SW_PINIController="10.240.24.166"

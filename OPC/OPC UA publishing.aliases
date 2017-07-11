@@ -1,0 +1,15 @@
+[AES-9025]
+AES-9025 = "10.100.1.105"
+
+[Ethernet RIO]
+Ethernet RIO = "0.0.0.0"
+
+[My Computer]
+My Computer = "10.209.3.46"
+
+[NWPXI8106]
+NWPXI8106 = "192.168.1.50"
+
+[PXI-8196-ianb]
+PXI-8196-ianb = "10.100.1.250"
+
